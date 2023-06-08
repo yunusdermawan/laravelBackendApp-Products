@@ -17,4 +17,21 @@ class ProductController extends Controller
             "products" => $products
         ]);
     }
+
+    // Adding data
+    public function store(Request $request) {
+        $validasi = $request->validate([
+            'nama' => "required",
+            'harga' => "required|numeric",
+            'desc' => "required",
+        ]);
+
+        $products = Product::create($validasi);
+
+        return response()->json([
+            "message" => "Berhasil menambah",
+            "status" => 200,
+            "products" => $products
+        ]);
+    } 
 }
